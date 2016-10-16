@@ -22,5 +22,5 @@ from __future__ import print_function
 import sys
 
 # pylint: disable=unused-import,wildcard-import,line-too-long
-from tensorflow.contrib.seq2seq.python.ops import layers
-from tensorflow.contrib.seq2seq.python.ops import loss
+from tensorflow.contrib.seq2seq.python.ops.layers import * 
+from tensorflow.contrib.seq2seq.python.ops.loss import *

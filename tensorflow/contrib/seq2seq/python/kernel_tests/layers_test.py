@@ -69,7 +69,7 @@ class LayersTest(tf.test.TestCase):
 
   # test time_major=True
   def test_rnn_decoder2(self):
-    with self.tf.test_session() as sess:
+    with self.test_session() as sess:
       with tf.variable_scope("root", initializer=tf.constant_initializer(0.5)):
         BATCH_SIZE = 2
         INPUT_SIZE = 3

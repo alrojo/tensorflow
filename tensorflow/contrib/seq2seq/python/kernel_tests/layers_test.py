@@ -52,11 +52,12 @@ class LayersTest(tf.test.TestCase):
         decoder_fn = lambda state: tf.constant(0.5,
                                                shape=[BATCH_SIZE,
                                                       DECODER_INPUT_SIZE])
-        decoder_outputs, valid_decoder_outputs = tf_utils.rnn_decoder(
-                cell=tf.nn.rnn_cell.GRUCell(DECODER_SIZE),
-                decoder_inputs=decoder_inputs, initial_state=encoder_state,
-                decoder_fn=decoder_fn, sequence_length=decoder_length,
-                time_major=False)
+        decoder_outputs, valid_decoder_outputs = \
+          tf.contrib.seq2seq.rnn_decoder(
+              cell=tf.nn.rnn_cell.GRUCell(DECODER_SIZE),
+              decoder_inputs=decoder_inputs, initial_state=encoder_state,
+              decoder_fn=decoder_fn, sequence_length=decoder_length,
+              time_major=False)
 
         tf.initialize_all_variables().run()
         decoder_outputs_res = sess.run(decoder_outputs)
@@ -68,7 +69,7 @@ class LayersTest(tf.test.TestCase):
 
   # test time_major=True
   def test_rnn_decoder2(self):
-    with tf.test_session() as sess:
+    with self.tf.test_session() as sess:
       with tf.variable_scope("root", initializer=tf.constant_initializer(0.5)):
         BATCH_SIZE = 2
         INPUT_SIZE = 3
@@ -93,11 +94,12 @@ class LayersTest(tf.test.TestCase):
         decoder_fn = lambda state: tf.constant(0.5,
                                                shape=[BATCH_SIZE,
                                                       DECODER_INPUT_SIZE])
-        decoder_outputs, valid_decoder_outputs = tf_utils.rnn_decoder(
-                cell=tf.nn.rnn_cell.GRUCell(DECODER_SIZE),
-                decoder_inputs=decoder_inputs, initial_state=encoder_state,
-                decoder_fn=decoder_fn, sequence_length=decoder_length,
-                time_major=True)
+        decoder_outputs, valid_decoder_outputs = \
+          tf.contrib.seq2seq.rnn_decoder(
+              cell=tf.nn.rnn_cell.GRUCell(DECODER_SIZE),
+              decoder_inputs=decoder_inputs, initial_state=encoder_state,
+              decoder_fn=decoder_fn, sequence_length=decoder_length,
+              time_major=True)
 
         tf.initialize_all_variables().run()
         decoder_outputs_res = sess.run(decoder_outputs)
